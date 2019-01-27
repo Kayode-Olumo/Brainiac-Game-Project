@@ -1,3 +1,3 @@
-# Memory-Game-Project
+# Brainiac-Game-Project
 
 Game Title: Brainiac
