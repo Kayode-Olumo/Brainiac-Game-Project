@@ -1,4 +1,4 @@
-/ 1. creating the global variables
+// 1. creating the global variables
 let imgArray = [];//array for the image elements
 let randNum = 0;//Holds random numbers generated
 let flipCount = 0; //takes track of the number of flips in the flipsArray
@@ -163,8 +163,6 @@ function flipCardBck(){
 	checkClick = 0;
 }
 
-
-
 function numMover() {
 	moves ++;
 	move.innerHTML = `Moves: ${moves}`;// Moves: 2
@@ -215,6 +213,7 @@ function randCard(){
 
 function hideResults() {
 	trans.style.display = "none";
+
 }
 
 function showResults() {
@@ -229,7 +228,7 @@ function showResults() {
 
 	if(currentTimeInSecs === 0){
 		scoreHeader.innerHTML = 'Times up!, Try again';
-		scoreText.innerHTML = `Your time was: ${formatTimeToNiceString(maxTimeSecs)}, with ${moves} moves in total`;
+		scoreText.innerHTML = `Seems like you've run out of time, with ${moves} moves in total`;
 	}
 	else{
 		let duration = maxTimeSecs-currentTimeInSecs;
