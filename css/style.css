@@ -1,0 +1,250 @@
+/* remove default browser values */
+* {
+  -webkit-box-sizing: border-box; /* Safari, Chrome */
+  -moz-box-sizing: border-box; /* Firefox */
+  -ms-box-sizing: border-box; /* IE */
+  box-sizing: border-box;
+
+  margin: 0;
+  padding: 0;
+
+  -webkit-user-select: none; /* Safari, Chrome */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE */
+  user-select: none; /* Standard syntax */
+}
+
+html {
+  background-color: #fff;
+}
+/* heading */
+.header-title {
+  color: #08e6ee;
+  font-size: 50px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.header-quote {
+  color: #f770dc;
+  font-size: 15px;
+  font-family: sans-serif;
+  text-align: center;
+  font-style: italic;
+}
+
+/* status bar */
+.stats-bar{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 26px;
+  width: 100%;
+}
+
+#lives, #time, #moves, #reset-btn{
+  font-family: 'Coiny', cursive;
+  margin: 0 0 23px 0;
+  text-align: center;
+  width: 15%;
+}
+
+#lives{
+  color: #08e6ee;
+}
+
+.content{
+  /* color: grey; */
+  /* font:; */
+  font-size: 20px;
+}
+.reset{
+  background-color:#08e6ee;
+  border:none;
+  border-radius: 12px;
+  font-family: 'Coiny', cursive;
+  font-size: 13px;
+  margin-top: 5px;
+  height: 20px;
+  width: 60px;
+
+}
+
+.reset:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 8px 10px 0 rgba(0,0,0,0.19);
+}
+
+#reset-btn:hover{
+  margin: 0;
+  overflow: auto;
+  cursor: pointer;
+}
+
+ul li {
+  display: inline;
+  padding-bottom: 0px:
+}
+/* game play area */
+#game-area{
+  background-color: #e8e8e8;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 5px;
+  padding: 0;
+  width: 380px;
+}
+
+.all-cards{
+  display: flex;
+  flex-wrap: wrap;
+  height:410px;
+  justify-content: space-evenly;
+}
+
+article{
+  margin: auto;
+}
+
+.cards{
+  background-color: #fff;
+  border-radius: 12px;
+  height: 80px;
+  width: 80px;
+}
+
+.cards:hover{
+  background-color: #08e6ee;
+  cursor: pointer;
+}
+
+.card-frt{
+  backface-visibility: hidden;/* DEBUG: the back card should only be visible after the turn */
+  background-color: #565656;
+  border-radius: 12px;
+  height: 80px;
+  position: absolute;/* DEBUG: fixes the element in relation to the parent element */
+  transform: rotateY(0deg);/* DEBUG: rotation starts at zero degrees */
+  transition: transform 0.4s linear 0s; /* DEBUG: format transition (property, time-duration, type of transition, delay) */
+  width: 80px;
+}
+
+.brain{
+  margin: 24px 0 0 24px;
+}
+
+.card-bck{
+  backface-visibility: hidden;/* DEBUG: the back card should only be visible after the turn */
+  display: flex;
+  flex-wrap: wrap;
+  height: 70px;
+  justify-content: space-evenly;
+  margin: 5px 0 0 5px;
+  position: absolute;/* DEBUG: same position as the parent */
+  transform: rotateY(0deg);/* DEBUG: rotation starts at zero degrees */
+  transition: transform 0.4s linear 0s; /* DEBUG: format transition (property, time-duration, type of transition, delay) */
+  width: 70px;
+}
+
+#header, .stats-bar, .game-area{
+  /* display: none; */
+}
+
+#transparent, #score-sheet{
+  /* display: none; */
+}
+
+#transparent{
+  /* background-color: black; */
+
+/* DEBUG: inorder for the transparent screen to take up the entire page */
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  /* opacity: 0.3; */
+  width: 100%;
+  z-index: 10;
+  display: none;
+}
+
+#score-sheet{
+  /* border: 1px solid #5dddf7; */
+  height: auto;
+  /* padding: 2px; */
+  position: fixed;
+  width: 500px;
+  z-index: 10;
+  display: none;
+}
+
+.score-body{
+  background-color: #fff;
+  border-color: #08e6ee;
+  border-style: solid;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-width: 2px 2px 0 2px;
+  height: 290px;
+  width: 500px;
+}
+
+#score-img{
+  margin-left: 20px;
+  position: relative;
+  top: 12px;
+}
+
+#score-header{
+  font-size: 30px;
+}
+
+#score-header, #score-text{
+  font-family: 'Coiny', cursive;
+  text-align: center;
+}
+
+#score-text{
+  font-size: 16px;
+}
+
+.score-btn{
+  background-color: #08e6ee;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  /* border-style: solid; */
+  border-width: 2px 2px 0 2px;
+  height: 75px;
+  padding: 30px;
+}
+
+.play-again{
+  background-color: #08e6ee;
+  border-radius: 5px;
+  color: ##08e6ee;
+  cursor: pointer;
+  font-size: 12px;
+  height:36px;
+  margin: 0 auto;
+  width: 95px;
+}
+
+#play-btn{
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: #08e6ee;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Coiny', cursive;
+  font-size: 15px;
+  margin: 0 auto;
+  text-align: center;
+  height:36px;
+  width: 95px;
+}
+
+#play-btn:hover{
+  background-color: #fff;
+  color:#08e6ee;
+}
