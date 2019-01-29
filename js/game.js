@@ -26,7 +26,7 @@ let scoreText = document.getElementById('score-text');
 
 let imgStatus = 0; //checks that all elements retrieve in the array are unique
 let timeCounter;
-let maxTimeSecs = 3;
+let maxTimeSecs = 60;
 let currentTimeInSecs;
 let secs = maxTimeSecs; // seconds count down is set by maxTimeSecs
 let gameOver = false;//boolean vaule false because the game is not over until the time runs out
