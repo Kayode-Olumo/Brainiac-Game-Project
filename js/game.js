@@ -17,7 +17,7 @@ let gameStage = document.getElementById('game-area');
 let time = document.getElementById('time');
 let live = document.getElementById('health-star');
 let move = document.getElementById('moves');
-let newGame;
+let newGame = document.getElementById('reset-btn');
 let playAgainButton = document.getElementById('play-btn');
 let scoreSheet = document.getElementById('score-sheet');
 let trans = document.getElementById('transparent');
@@ -139,9 +139,9 @@ function cardClick(i) {
 			}
 		}
 	}
-	if(gameOver == true) {
-		alert('Game Over, you lose');
-	}
+	// if(gameOver == true) {
+	// 	alert('Game Over, you lose');
+	// }
 }
 
 function flipCardBck(){
@@ -169,7 +169,7 @@ function numMover() {
 }
 
 // Creating the new game button
-newGame = document.getElementById('reset-btn');//selects the new game buttons id
+newGame;//selects the new game buttons id
 newGame.addEventListener('click', clicked);//listens out for an alert when the button is clicked
 
 function clicked(){
