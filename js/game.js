@@ -17,7 +17,7 @@ let gameStage = document.getElementById('game-area');
 let time = document.getElementById('time');
 let live = document.getElementById('health-star');
 let move = document.getElementById('moves');
-let newGame = document.getElementById('reset-btn');
+let newGame;
 let playAgainButton = document.getElementById('play-btn');
 let scoreSheet = document.getElementById('score-sheet');
 let trans = document.getElementById('transparent');
@@ -26,7 +26,7 @@ let scoreText = document.getElementById('score-text');
 
 let imgStatus = 0; //checks that all elements retrieve in the array are unique
 let timeCounter;
-let maxTimeSecs = 60;
+let maxTimeSecs = 25;
 let currentTimeInSecs;
 let secs = maxTimeSecs; // seconds count down is set by maxTimeSecs
 let gameOver = false;//boolean vaule false because the game is not over until the time runs out
@@ -139,9 +139,9 @@ function cardClick(i) {
 			}
 		}
 	}
-	// if(gameOver == true) {
-	// 	alert('Game Over, you lose');
-	// }
+	if(gameOver == true) {
+		alert('Game Over, you lose');
+	}
 }
 
 function flipCardBck(){
@@ -163,13 +163,15 @@ function flipCardBck(){
 	checkClick = 0;
 }
 
+
+
 function numMover() {
 	moves ++;
 	move.innerHTML = `Moves: ${moves}`;// Moves: 2
 }
 
 // Creating the new game button
-newGame;//selects the new game buttons id
+newGame = document.getElementById('reset-btn');//selects the new game buttons id
 newGame.addEventListener('click', clicked);//listens out for an alert when the button is clicked
 
 function clicked(){
@@ -213,7 +215,6 @@ function randCard(){
 
 function hideResults() {
 	trans.style.display = "none";
-
 }
 
 function showResults() {
@@ -228,7 +229,7 @@ function showResults() {
 
 	if(currentTimeInSecs === 0){
 		scoreHeader.innerHTML = 'Times up!, Try again';
-		scoreText.innerHTML = `Seems like you've run out of time, with ${moves} moves in total`;
+		scoreText.innerHTML = `Your time was: ${formatTimeToNiceString(maxTimeSecs)}, with ${moves} moves in total`;
 	}
 	else{
 		let duration = maxTimeSecs-currentTimeInSecs;
