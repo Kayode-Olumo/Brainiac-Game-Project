@@ -10,8 +10,8 @@ let cardFront;
 let cardBack;
 let checkClick = 0; //number of clicks
 let moves = 0;//moves
-// const maxMoves = 25;
-let lives; //lives
+let lives = document.querySelectorAll('.fa-lives'); //lives
+let livesList = document.querySelectorAll('.lives li')
 let maxNoOfMoves = 3;
 
 // var to retrieve the HTML elements
@@ -96,6 +96,9 @@ gameStage.addEventListener("click",function(evt) {
 	}
 });
 
+
+
+
 playAgainButton.addEventListener("click", function(){
 	hideResults();
 	resetGame();
@@ -116,7 +119,6 @@ function cardClick(i) {
 			flipCount ++;
 			flipsArray[cardNum-1] = 1;
 			numMover();
-			// lostLives();
 
 
 			if(flipCount == 2){//compares a max of 2 cards
@@ -145,9 +147,6 @@ function cardClick(i) {
 			}
 		}
 	}
-	// if(gameOver == true) {
-	// 	alert('Game Over, you lose');
-	// }
 }
 
 function flipCardBck(){
@@ -176,19 +175,7 @@ function numMover() {
 
 }
 // determine when to remove star based on moves
-if(moves > 18 && moves < 28){
-	for(i = 0; i < 3; i++){
-		if(i > 1){
-			live.style.visibility = "collapse";
-		}
-	}
-}else if(moves > 21){
-	for(i = 0; i < 3; i++){
-		if(i < 0){
-			live.style.visibility = "collapse";
-		}
-	}
-}
+
 
 // Creating the new game button
 newGame;//selects the new game buttons id
