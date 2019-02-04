@@ -124,8 +124,6 @@ function cardClick(i) {
 			if(flipCount == 2){//compares a max of 2 cards
 				// the comparison begins
 				if(cardHTML[0] == cardHTML[1]){
-					// moves ++;
-					// move.innerHTML = `Moves: ${moves}`;// Moves: 2
 
 					cardHTML = [];//empty the imgArray
 					cardArray = [];
@@ -172,7 +170,19 @@ function numMover() {
 	moves ++;
 	move.innerHTML = `Moves: ${moves}`;// Moves: 2
 
-
+	if(moves > 26 && moves < 30) {
+		for(star = 0; star < 3; star++){
+			if(star > 1){
+				lives[star].style.display = 'none';
+			}
+		}
+	}else if(inx > 37){
+		for(inx = 0; inx < 3; inx++){
+			if(inx > 0){
+				lives[inx].style.display = 'none';
+			}
+		}
+	}
 }
 // determine when to remove star based on moves
 
@@ -229,6 +239,7 @@ function showResults() {
 	gameOver = true;
 
 	let width = window.innerWidth;
+	let starRank = document.querySelector('.lives').innerHTML;
 
 	trans.style.display = "block";
 	scoreSheet.style.display = "block";
@@ -238,11 +249,13 @@ function showResults() {
 	if(currentTimeInSecs === 0){
 		scoreHeader.innerHTML = 'Times up!, Try again';
 		scoreText.innerHTML = `Seems like you've run out of time, with ${moves} moves in total`;
+		// document.getElementsByClassName('star-rank')[0].innerHTML = starRank;
 	}
 	else{
 		let duration = maxTimeSecs-currentTimeInSecs;
 		scoreHeader.innerHTML = 'Awesome, you beat the timer!';
 		scoreText.innerHTML = `Your time was: ${formatTimeToNiceString(duration)}, with ${moves} moves in total`;
+		document.getElementsByClassName('star-rank')[0].innerHTML = starRank;
 	}
 	playAgain = document.getElementById('play-btn');
 	playAgain.addEventListener('click', clicked);
