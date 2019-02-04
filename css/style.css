@@ -53,6 +53,10 @@ html {
   color: #08e6ee;
 }
 
+.lives{
+	display: inline-block;
+}
+
 .content{
   /* color: grey; */
   /* font:; */
@@ -145,17 +149,8 @@ article{
   width: 70px;
 }
 
-#header, .stats-bar, .game-area{
-  /* display: none; */
-}
-
-#transparent, #score-sheet{
-  /* display: none; */
-}
 
 #transparent{
-  /* background-color: black; */
-
 /* DEBUG: inorder for the transparent screen to take up the entire page */
   height: 100%;
   top: 0;
@@ -205,6 +200,22 @@ article{
 
 #score-text{
   font-size: 16px;
+}
+
+.star-rank{
+  color: #08e6ee;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Coiny', cursive;
+  font-size: 50px;
+  letter-spacing: 20px;
+  list-style-type: none;
+  text-align: center;
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* justify-content: center; */
+  margin-top: 26px;
+  width: 100%;
 }
 
 .score-btn{
