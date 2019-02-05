@@ -5,7 +5,7 @@
 This game seeks to test memory of the player and how well they can retain information.
  
 ## Mission
-Match all the cards before timer runs out and with the least number of moves. Top tier players will be able to complete the game all their lives intact.  
+Match all the cards before timer runs out and with the least number of moves. Top tier players will be able to complete the game with all their lives intact.  
 ![snippet](assets/Brainiac-snap.png)
 
 ## How to play
