@@ -15,7 +15,7 @@ Match all the cards before timer runs out and with the least number of moves. To
 
 ## How it was built
 This project was developed using the following technologies:
-### HTMl
+### HTML
 * For basic structuring and layout of the UI
 ### CSS
 * For positioning and styling of the application
