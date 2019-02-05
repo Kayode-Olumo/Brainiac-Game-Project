@@ -10,7 +10,7 @@ Match all the cards before timer runs out and with the least number of moves. To
 
 ## How to play
 1.	Click on a card to reveal an image.
-2.	Complete clicking cards until you find a matching pair.
+2.	Continue clicking cards until you find a matching pair.
 3.	To reduce the number of move and time taken, try to create a mental picture of where images are placed.  
 
 ## How it was built
