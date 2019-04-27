@@ -10,24 +10,78 @@ let cardFront;
 let cardBack;
 let checkClick = 0; //number of clicks
 let moves = 0;//moves
-let lives; //lives
+let lives = document.querySelectorAll('.fa-lives'); //lives
+let livesList = document.querySelectorAll('.lives li')
+let maxNoOfMoves = 3;
 
 // var to retrieve the HTML elements
 let gameStage = document.getElementById('game-area');
 let time = document.getElementById('time');
-let live = document.getElementById('health-star');
+let live = document.querySelectorAll('star');
+
+
 let move = document.getElementById('moves');
-let newGame;
+let newGame = document.getElementById('reset-btn');
+let playAgainButton = document.getElementById('play-btn');
 let scoreSheet = document.getElementById('score-sheet');
 let trans = document.getElementById('transparent');
 let scoreHeader = document.getElementById('score-header');
 let scoreText = document.getElementById('score-text');
+let health = 1;
 
 let imgStatus = 0; //checks that all elements retrieve in the array are unique
 let timeCounter;
-let secCounter = 5; //sets the timer to start at 60 seconds
-let secs = secCounter; // seconds count down is set by secCounter
+let maxTimeSecs = 60;
+let currentTimeInSecs;
+let secs = maxTimeSecs; // seconds count down is set by maxTimeSecs
 let gameOver = false;//boolean vaule false because the game is not over until the time runs out
+
+
+//This logic occurs as soon as the page loads
+(function() {
+	restartMaxTime();
+	updateTimer(currentTimeInSecs);
+	var gameLoop = setInterval(gameTimer, 1000);
+ })();
+
+function gameTimer(){
+	if (!timeIsOver() && !gameIsWon()){
+		updateTimer(currentTimeInSecs);
+		currentTimeInSecs--;
+	}
+	else{
+		showResults();
+	}
+}
+
+function gameIsWon(){
+	for (i = 0; i < flipsArray.length; i++){
+		if(flipsArray[i] === 0){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+function timeIsOver(){
+	if(currentTimeInSecs === 0){
+		return 1;
+	}
+	else return 0;
+}
+
+function restartMaxTime(){
+	currentTimeInSecs = maxTimeSecs;
+}
+
+function resetGame(){
+	restartMaxTime();
+	updateTimer(currentTimeInSecs);
+}
+
+function updateTimer(currentTimeInSecs){
+	time.innerHTML = formatTimeToNiceString(currentTimeInSecs);
+}
 
 //2. flipping function
 //needs an eventlistener with an anonymous function
@@ -40,6 +94,14 @@ gameStage.addEventListener("click",function(evt) {
 	else {
 		cardClick(retrieveId);
 	}
+});
+
+
+
+
+playAgainButton.addEventListener("click", function(){
+	hideResults();
+	resetGame();
 });
 
 function cardClick(i) {
@@ -57,38 +119,32 @@ function cardClick(i) {
 			flipCount ++;
 			flipsArray[cardNum-1] = 1;
 			numMover();
-			// lostLives();
 
 
 			if(flipCount == 2){//compares a max of 2 cards
 				// the comparison begins
 				if(cardHTML[0] == cardHTML[1]){
-					// moves ++;
-					// move.innerHTML = `Moves: ${moves}`;// Moves: 2
 
 					cardHTML = [];//empty the imgArray
 					cardArray = [];
 					flipCount = 0;
 
 					if(time === 0){//needs a delay because it shows too quickly, Using an anonymous function
-							clearTimeout(secCounter);//stop countdown
-							setTimeout(function(){showResults();}, 500);// set to 500 milliseconds
+						clearTimeout(maxTimeSecs);//stop countdown
+						setTimeout(function(){showResults();}, 500);// set to 500 milliseconds
 					}
 					return;//return to stop the execution of the function
-				}else{//need a way to flip back
+				}
+				else{
+					//need a way to flip back
 					checkClick = 1;
 					//calling a new function to flip card back with a delay was it does not happen suddenly
-					setTimeout(function(){flipCardBck();},500);
-					return;
+					setTimeout(function(){flipCardBck();
+				}, 500);
+				return;
 			}
-
 		}
-
 	}
-	if(gameOver == true) {
-		alert('Game Over, you lose');
-	}
-
 }
 
 function flipCardBck(){
@@ -108,18 +164,31 @@ function flipCardBck(){
 	cardArray = [];
 	flipCount = 0;
 	checkClick = 0;
-
 }
-
-
 
 function numMover() {
 	moves ++;
 	move.innerHTML = `Moves: ${moves}`;// Moves: 2
+
+	if(moves > 26 && moves < 30) {
+		for(star = 0; star < 3; star++){
+			if(star > 1){
+				lives[star].style.display = 'none';
+			}
+		}
+	}else if(moves > 43){
+		for(star = 0; star < 3; star++){
+			if(star > 0){
+				lives[star].style.display = 'none';
+			}
+		}
+	}
 }
+// determine when to remove star based on moves
+
 
 // Creating the new game button
-newGame = document.getElementById('reset-btn');//selects the new game buttons id
+newGame;//selects the new game buttons id
 newGame.addEventListener('click', clicked);//listens out for an alert when the button is clicked
 
 function clicked(){
@@ -159,48 +228,50 @@ function randCard(){
 		imgStatus = 0;//before the next for loop is executed imgArray must be set to zero
 		document.getElementById(`card-bck-${i+1}`).innerHTML = img[randNum];//arrays index at zero hence why 1 is added
 	}
-	//potentially call the time here
-	beginTimer(secCounter);
+}
+
+function hideResults() {
+	trans.style.display = "none";
+
 }
 
 function showResults() {
 	gameOver = true;
 
 	let width = window.innerWidth;
+	let starRank = document.querySelector('.lives').innerHTML;
 
 	trans.style.display = "block";
 	scoreSheet.style.display = "block";
 	scoreSheet.style.left = (width/2) - (500/2) + 'px';//setting the position of the results box
 	scoreSheet.style.top = 150 + 'px';
 
-	if(secs === 0){
-		clearTimeout(secCounter)
+	if(currentTimeInSecs === 0){
 		scoreHeader.innerHTML = 'Times up!, Try again';
-		scoreText.innerHTML = `Your time was: 00:00, with ${moves} moves in total`;
-	}else{
-		scoreHeader.innerHTML = 'Awesome, you beat the timer!';
-		scoreText.innerHTML = `Your time was: 00:00, with ${moves} moves in total`;
+		scoreText.innerHTML = `Seems like you've run out of time, with ${moves} moves in total`;
+		// document.getElementsByClassName('star-rank')[0].innerHTML = starRank;
 	}
-	// if(time === 20) {//if the user finishes the game in 20 moves
-	// 	alert(`woooooow!!!!${moves}`);
-	// }else{
-	// 	alert(`your moves ${moves} and your time was 00:${secCounter}`);
-	// }
+	else{
+		let duration = maxTimeSecs-currentTimeInSecs;
+		scoreHeader.innerHTML = 'Awesome, you beat the timer!';
+		scoreText.innerHTML = `Your time was: ${formatTimeToNiceString(duration)}, with ${moves} moves in total`;
+		document.getElementsByClassName('star-rank')[0].innerHTML = starRank;
+	}
+	playAgain = document.getElementById('play-btn');
+	playAgain.addEventListener('click', clicked);
 }
 
-function beginTimer(secs){
-	time.innerHTML = `00:${secs}`;//00:60 later need to work on the minutes countdown
+function formatTimeToNiceString(timeInSecs){
+    var minutes = Math.floor(timeInSecs / 60);
+    var seconds = timeInSecs - (minutes * 60);
 
-	if(secs === 0){
-		clearTimeout(secCounter);//stop countdown and function
-		showResults();
-		time.innerHTML = '00:00';//to avoid 00:-1
-		return;
+    if (minutes < 10) {
+		minutes = "0" + minutes;
 	}
-	secs--;//decrement by 1
-	//need to create a recurrring function so it can continue calling itslef with new arguements
-	secCounter = setTimeout(function(){beginTimer(secs);}, 1000);//another anonymous function to allow a count down of 1second;
-	//need an arguement to what the countdown
+    if (seconds < 10) {
+		seconds = "0" + seconds;
+	}
+    return minutes + ':' + seconds;
 }
 
 let tRbtn = document.getElementById('play-btn');
